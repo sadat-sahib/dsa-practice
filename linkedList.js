@@ -19,6 +19,7 @@ class LinkedList {
     return this.size;
   }
 //O(1)
+//add element at the beginning
   prepend(vlaue) {
     const newNode = new Node(vlaue);
     if (this.isEmpty()) {
@@ -32,6 +33,7 @@ class LinkedList {
 
   }
 //O(n)
+//add element at the end
   append(vlaue) {
     const newNode = new Node(vlaue);
     if (this.isEmpty()) {
@@ -46,7 +48,7 @@ class LinkedList {
 
     this.size++;
   }
-
+// add element at a specific index
   insert (value, index) {
     if (index < 0 || index > this.size) {
         return
@@ -63,6 +65,27 @@ class LinkedList {
         prev.next = newNode;
         this.size++;
     }
+  }
+
+  removeFrom( index ) {
+    if (index < 0 || index >= this.size) {
+        return null
+    }
+    let removedNode;
+    if (index === 0) {
+        removedNode = this.head;
+        this.head = this.head.next;
+    } else {
+        let prev = this.head;
+        for (let i = 0; i < index - 1; i++) {
+            prev = prev.next
+        }
+        removedNode = prev.next;
+        prev.next = removedNode.next;
+    }
+
+    this.size--;
+    return removedNode.value;
   }
 
   print() {
@@ -83,11 +106,18 @@ class LinkedList {
 const list = new LinkedList();
 console.log("Is list empty?", list.isEmpty());
 console.log("List size:", list.getSize());
-list.print();
+
 
 list.insert(10, 0);
 list.print();
 
 list.insert(20,0);
+list.insert(30,1);
+list.insert(40,2);
 list.print();
-// lesson 19
+
+console.log(list.removeFrom(2));
+
+list.print();
+
+
