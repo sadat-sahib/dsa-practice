@@ -111,6 +111,34 @@ class LinkedList {
     }
   }
 
+  search (value) {
+    if(this.isEmpty()) {
+        return -1
+    }
+    let i = 0;
+    let curr = this.head;
+    while (curr) {
+        if (curr.value === value) {
+            return i
+        }
+        curr = curr.next;
+        i++;
+    }
+    return -1
+  }
+
+  reverse() {
+    let curr = this.head
+    let prev = null 
+    while(curr) {
+      let next = curr.next
+      curr.next =  prev
+      prev = curr
+      curr = next
+    }
+    this.head = prev
+  }
+
   print() {
     if (this.isEmpty()) {
       console.log("List is empty");
@@ -144,5 +172,8 @@ list.print();
 // list.print();
 
 
-console.log(list.removeValue(40));
+// console.log(list.removeValue(40));
+list.print();
+console.log("Index of 30:", list.search(30));
+list.reverse()
 list.print();
